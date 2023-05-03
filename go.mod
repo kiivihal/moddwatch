@@ -1,4 +1,4 @@
-module github.com/cortesi/moddwatch
+module github.com/kiivihal/moddwatch
 
 go 1.20
 

@@ -9,8 +9,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/cortesi/moddwatch/filter"
 	"github.com/rjeczalik/notify"
+
+	"github.com/kiivihal/moddwatch/filter"
 )
 
 // MaxLullWait is the maximum time to wait for a lull. This only kicks in if
@@ -227,7 +228,6 @@ func mkmod(exists existenceChecker, added fset, removed fset, changed fset, rena
 	ret.Changed = _keys(changed)
 	ret.Deleted = _keys(removed)
 	return ret
-
 }
 
 // This function batches events up, and emits just a list of paths for files
@@ -390,20 +390,22 @@ func baseDirs(root string, includePatterns []string) ([]string, []string) {
 // the returned path is absolute.
 //
 // Pattern syntax is as follows:
-//   *              any sequence of non-path-separators
-//   **             any sequence of characters, including path separators
-//   ?              any single non-path-separator character
-//   [class]        any single non-path-separator character against a class
-//                  of characters (see below)
-//   {alt1,...}     a sequence of characters if one of the comma-separated
-//                  alternatives matches
 //
-//  Any character with a special meaning can be escaped with a backslash (\).
+//   - any sequence of non-path-separators
+//     **             any sequence of characters, including path separators
+//     ?              any single non-path-separator character
+//     [class]        any single non-path-separator character against a class
+//     of characters (see below)
+//     {alt1,...}     a sequence of characters if one of the comma-separated
+//     alternatives matches
+//
+//     Any character with a special meaning can be escaped with a backslash (\).
 //
 // Character classes support the following:
-// 		[abc]		any single character within the set
-// 		[a-z]		any single character in the range
-// 		[^class] 	any single character which does not match the class
+//
+//	[abc]		any single character within the set
+//	[a-z]		any single character in the range
+//	[^class] 	any single character which does not match the class
 func Watch(
 	root string,
 	includes []string,
